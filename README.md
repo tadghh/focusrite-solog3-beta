@@ -1,2 +1,4 @@
-# focusrite-solog3-beta
-2020 Beta drivers for the Focusrite solo gen 3
+# Fixes issues like
+- Low quality mic audio
+- Drop outs from WSL
+- Perhaps others?
