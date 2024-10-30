@@ -1,0 +1,232 @@
+;------------------------------------------------------------------------------
+;
+;  Focusrite Usb
+;
+;  Version    :  4.87.4.709 WDM audio & midi installer file
+;  Last Update:  12/11/2020-17:56:07
+;
+;------------------------------------------------------------------------------
+
+[Version]
+Signature="$WINDOWS NT$"
+
+Class=MEDIA
+ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+
+Provider=%MFGNAME%
+CatalogFile=Focusriteusb.cat
+DriverVer=12/11/2020,4.87.4.709
+
+[Manufacturer]
+%MFGNAME%=DeviceList, NTamd64,NTx86
+
+
+[DeviceList.NTx86]
+%DESCRIPTION_PRODUCT_LINE_MIDI%=MidiInstall, Focusriteusb\MidiInOut
+%DESCRIPTION_PRODUCT_LINE_AUDIO%=AudioInstall, Focusriteusb\Audio&Adapter
+
+[DeviceList.NTamd64]
+%DESCRIPTION_PRODUCT_LINE_MIDI%=MidiInstall, Focusriteusb\MidiInOut
+%DESCRIPTION_PRODUCT_LINE_AUDIO%=AudioInstall, Focusriteusb\Audio&Adapter
+
+[SourceDisksFiles]
+FocusriteusbMidi.sys = 1
+FocusriteusbAudio.sys = 1
+
+[SourceDisksNames]
+1 = %DESCRIPTION_PRODUCT_LINE_AUDIO%
+
+[DestinationDirs]
+DefaultDestDir=12
+
+
+;------------------------------------------------------------------------------
+;  Windows 2000 Sections: Focusrite Usb MIDI
+;------------------------------------------------------------------------------
+[MidiInstall.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration.NT
+CopyFiles=MIDICopyFiles
+AddReg=MidiInstall.AddReg
+
+[MidiInstall.AddReg]
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,FocusriteusbMidi.sys
+HKR,,NTMPDriver,,FocusriteusbMidi.sys
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"midi,mixer"
+HKR,Drivers\midi\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\midi\wdmaud.drv,Description,, %DESCRIPTION_PRODUCT_LINE_MIDI%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DESCRIPTION_PRODUCT_LINE_MIDI%
+
+[MidiInstall.NT.Services]
+AddService = Focusriteusb_MIDI, 0x00000002, MidiInstall_AddService
+
+[MidiInstall_AddService]
+DisplayName    = %DESCRIPTION_PRODUCT_LINE_MIDI%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\FocusriteusbMidi.sys
+
+[MIDICopyFiles]
+FocusriteusbMidi.sys
+
+
+
+;------------------------------------------------------------------------------
+;  Focusrite Usb Audio
+;------------------------------------------------------------------------------
+[AudioInstall.NT]
+Include=ks.inf, wdmaudio.inf
+Needs=KS.Registration, WDMAUDIO.Registration.NT
+CopyFiles=AudioCopyFiles
+AddReg=AudioInstall.AddReg,MediaCats.AddReg
+
+[AudioInstall.AddReg]
+HKR,,SetupPreferredAudioDevices,3,01,00,00,00
+HKR,,AssociatedFilters,,"wdmaud,swmidi,redbook"
+HKR,,Driver,,FocusriteusbAudio.sys
+HKR,,NTMPDriver,,FocusriteusbAudio.sys
+HKR,,CLSID,,%Proxy.CLSID%
+HKR,Drivers,SubClasses,,"wave,mixer"
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv, Driver,,wdmaud.drv
+HKR,Drivers\mixer\wdmaud.drv,Driver,,wdmaud.drv
+HKR,Drivers\wave\wdmaud.drv,Description,,%DESCRIPTION_PRODUCT_LINE_AUDIO%
+HKR,Drivers\mixer\wdmaud.drv,Description,,%DESCRIPTION_PRODUCT_LINE_AUDIO%
+
+[AudioInstall.NT.Services]
+AddService = Focusriteusb_AUDIO, 0x00000002, AudioInstall_AddService
+
+[AudioInstall_AddService]
+DisplayName    = %DESCRIPTION_PRODUCT_LINE_AUDIO%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\FocusriteusbAudio.sys
+
+[AudioCopyFiles]
+FocusriteusbAudio.sys
+
+[MediaCats.AddReg]
+HKLM,%MediaCategories%\%GUID.FNIANALOG1%,Name,,"Analogue 1 + 2"
+HKLM,%MediaCategories%\%GUID.FNIANALOG1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG2%,Name,,"Analogue 3 + 4"
+HKLM,%MediaCategories%\%GUID.FNIANALOG2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG3%,Name,,"Analogue 5 + 6"
+HKLM,%MediaCategories%\%GUID.FNIANALOG3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG4%,Name,,"Analogue 7 + 8"
+HKLM,%MediaCategories%\%GUID.FNIANALOG4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG5%,Name,,"Analogue 9 + 10"
+HKLM,%MediaCategories%\%GUID.FNIANALOG5%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG6%,Name,,"Analogue 11 + 12"
+HKLM,%MediaCategories%\%GUID.FNIANALOG6%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG7%,Name,,"Analogue 13 + 14"
+HKLM,%MediaCategories%\%GUID.FNIANALOG7%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIANALOG8%,Name,,"Analogue 15 + 16"
+HKLM,%MediaCategories%\%GUID.FNIANALOG8%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK1%,Name,,"Playback 1 + 2"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK2%,Name,,"Playback 3 + 4"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK3%,Name,,"Playback 5 + 6"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK4%,Name,,"Playback 7 + 8"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK5%,Name,,"Playback 9 + 10"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK5%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK6%,Name,,"Playback 11 + 12"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK6%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK7%,Name,,"Playback 13 + 14"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK7%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK8%,Name,,"Playback 15 + 16"
+HKLM,%MediaCategories%\%GUID.FNIPLAYBACK8%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%GUID.FNIINPUT1%,Name,,"Input 1 + 2"
+HKLM,%MediaCategories%\%GUID.FNIINPUT1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT2%,Name,,"Input 3 + 4"
+HKLM,%MediaCategories%\%GUID.FNIINPUT2%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT3%,Name,,"Input 5 + 6"
+HKLM,%MediaCategories%\%GUID.FNIINPUT3%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT4%,Name,,"Input 7 + 8"
+HKLM,%MediaCategories%\%GUID.FNIINPUT4%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT5%,Name,,"Input 9 + 10"
+HKLM,%MediaCategories%\%GUID.FNIINPUT5%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT6%,Name,,"Input 11 + 12"
+HKLM,%MediaCategories%\%GUID.FNIINPUT6%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT7%,Name,,"Input 13 + 14"
+HKLM,%MediaCategories%\%GUID.FNIINPUT7%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.FNIINPUT8%,Name,,"Input 15 + 16"
+HKLM,%MediaCategories%\%GUID.FNIINPUT8%,Display,1,00,00,00,00
+;
+HKLM,%MediaCategories%\%GUID.SPDIF1%,Name,,"S/PDIF L + R"
+HKLM,%MediaCategories%\%GUID.SPDIF1%,Display,1,00,00,00,00
+HKLM,%MediaCategories%\%GUID.LOOP1%,Name,,"Loopback L + R"
+HKLM,%MediaCategories%\%GUID.LOOP1%,Display,1,00,00,00,00
+
+HKLM,%MediaCategories%\%GUID.FNIALLCHANS%,Name,,"Focusrite Usb"
+HKLM,%MediaCategories%\%GUID.FNIALLCHANS%,Display,1,00,00,00,00
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+[Strings]
+MFGNAME = "Focusrite Audio Engineering, Ltd."
+
+DESCRIPTION_PRODUCT_LINE_MIDI = "Focusrite Usb MIDI"
+DESCRIPTION_PRODUCT_LINE_AUDIO = "Focusrite Usb Audio"
+
+KSCATEGORY_AUDIO = "{6994AD04-93EF-11D0-A3CC-00A0C9223196}"
+KSCATEGORY_RENDER="{65E8773E-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+Proxy.CLSID ="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+
+PKEY_AudioEndpoint_Association = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},2"
+PKEY_AudioEndpoint_Ext_UiClsid = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},1"
+PKEY_AudioEngine_OEMFormat =     "{E4870E26-3CC5-4CD2-BA46-CA0A9A70ED04},3"
+PKEY_AudioDevice_SetupPreferred = "{F3E80BEF-1723-4FF2-BCC4-7F83DC5E46D4},1"
+PKEY_AudioDevice_EnableEndpointByDefault= "{F3E80BEF-1723-4FF2-BCC4-7F83DC5E46D4},4"
+PKEY_AudioEndpoint_FormFactor = "{1DA5D803-D492-4EDD-8C23-E0C0FFEE7F0E},0"
+
+MediaCategories="SYSTEM\CurrentControlSet\Control\MediaCategories"
+GUID.FNIALLCHANS = "{122B2020-A230-4A96-BAE4-AA72FE7C650E}"
+GUID.FNIANALOG1 = "{7775CA00-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG2 = "{7775CA01-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG3 = "{7775CA02-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG4 = "{7775CA03-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG5 = "{7775CA04-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG6 = "{7775CA05-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG7 = "{7775CA06-474D-454f-A0BC-0347A376D141}"
+GUID.FNIANALOG8 = "{7775CA07-474D-454f-A0BC-0347A376D141}"
+
+GUID.FNIPLAYBACK1 = "{7775CB00-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK2 = "{7775CB01-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK3 = "{7775CB02-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK4 = "{7775CB03-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK5 = "{7775CB04-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK6 = "{7775CB05-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK7 = "{7775CB06-474D-454f-A0BC-0347A376D141}"
+GUID.FNIPLAYBACK8 = "{7775CB07-474D-454f-A0BC-0347A376D141}"
+
+GUID.FNIINPUT1 = "{7775CC00-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT2 = "{7775CC01-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT3 = "{7775CC02-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT4 = "{7775CC03-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT5 = "{7775CC04-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT6 = "{7775CC05-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT7 = "{7775CC06-474D-454f-A0BC-0347A376D141}"
+GUID.FNIINPUT8 = "{7775CC07-474D-454f-A0BC-0347A376D141}"
+
+GUID.SPDIF1	= "{7775CD00-474D-454f-A0BC-0347A376D141}"
+GUID.LOOP1	= "{7775CD01-474D-454f-A0BC-0347A376D141}"
+
+
+
+REG_DWORD = "0x00010001"
+KSNODETYPE_ANY = "{00000000-0000-0000-0000-000000000000}"
+KSNODETYPE_ANALOG_CONNECTOR = "{DFF21FE1-F70F-11D0-B917-00A0C9223196}"
+KSNODETYPE_SPEAKER = "{DFF21CE1-F70F-11D0-B917-00A0C9223196)"

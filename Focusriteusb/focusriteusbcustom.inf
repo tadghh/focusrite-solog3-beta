@@ -1,0 +1,227 @@
+;------------------------------------------------------------------------------
+;
+;  Focusrite Usb - Custom device class installation file
+;
+;  Version    :  4.87.4.709
+;  Last Update:  12/11/2020-17:56:07
+;
+;------------------------------------------------------------------------------
+
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Focusrite Audio
+ClassGuid={C8B76578-D062-4834-0001-F8B6F2162A22}
+
+Provider=%MFGNAME%
+CatalogFile=Focusriteusb.cat
+DriverVer=12/11/2020,4.87.4.709
+
+[Manufacturer]
+%MFGNAME%=DeviceList, NTamd64,NTx86
+
+
+[DeviceList.NTamd64]
+%DEVDESC_0%=DriverInstall,USB\VID_1235&PID_801c
+%DEVDESC_1%=DriverInstall,USB\VID_1235&PID_8016
+%DEVDESC_2%=DriverInstall,USB\VID_1235&PID_8006
+%DEVDESC_3%=DriverInstall,USB\VID_1235&PID_800a
+%DEVDESC_4%=DriverInstall,USB\VID_1235&PID_8012
+%DEVDESC_5%=DriverInstall,USB\VID_1235&PID_8002
+%DEVDESC_6%=DriverInstall,USB\VID_1235&PID_8004
+%DEVDESC_7%=DriverInstall,USB\VID_1235&PID_8014
+%DEVDESC_8%=DriverInstall,USB\VID_1235&PID_800c
+%DEVDESC_9%=DriverInstall,USB\VID_1235&PID_8205
+%DEVDESC_10%=DriverInstall,USB\VID_1235&PID_8202
+%DEVDESC_11%=DriverInstall,USB\VID_1235&PID_8200
+%DEVDESC_12%=DriverInstall,USB\VID_1235&PID_8203
+%DEVDESC_13%=DriverInstall,USB\VID_1235&PID_8204
+%DEVDESC_14%=DriverInstall,USB\VID_1235&PID_8201
+%DEVDESC_15%=DriverInstall,USB\VID_1235&PID_8206
+%DEVDESC_16%=DriverInstall,USB\VID_1235&PID_8207
+%DEVDESC_17%=DriverInstall,USB\VID_1235&PID_8208
+%DEVDESC_18%=DriverInstall,USB\VID_1235&PID_8210
+%DEVDESC_19%=DriverInstall,USB\VID_1235&PID_8211
+%DEVDESC_20%=DriverInstall,USB\VID_1235&PID_8212
+%DEVDESC_21%=DriverInstall,USB\VID_1235&PID_8213
+%DEVDESC_22%=DriverInstall,USB\VID_1235&PID_8214
+%DEVDESC_23%=DriverInstall,USB\VID_1235&PID_8215
+%DEVDESC_24%=DriverInstall,USB\VID_1235&PID_800e
+%DEVDESC_25%=DriverInstall,USB\VID_1235&PID_8008
+%DESCRIPTION_PRODUCT_LINE_ROOT%=SwRootInstall,ROOT\Focusriteusb
+
+[DeviceList.NTx86]
+%DEVDESC_0%=DriverInstall,USB\VID_1235&PID_801c
+%DEVDESC_1%=DriverInstall,USB\VID_1235&PID_8016
+%DEVDESC_2%=DriverInstall,USB\VID_1235&PID_8006
+%DEVDESC_3%=DriverInstall,USB\VID_1235&PID_800a
+%DEVDESC_4%=DriverInstall,USB\VID_1235&PID_8012
+%DEVDESC_5%=DriverInstall,USB\VID_1235&PID_8002
+%DEVDESC_6%=DriverInstall,USB\VID_1235&PID_8004
+%DEVDESC_7%=DriverInstall,USB\VID_1235&PID_8014
+%DEVDESC_8%=DriverInstall,USB\VID_1235&PID_800c
+%DEVDESC_9%=DriverInstall,USB\VID_1235&PID_8205
+%DEVDESC_10%=DriverInstall,USB\VID_1235&PID_8202
+%DEVDESC_11%=DriverInstall,USB\VID_1235&PID_8200
+%DEVDESC_12%=DriverInstall,USB\VID_1235&PID_8203
+%DEVDESC_13%=DriverInstall,USB\VID_1235&PID_8204
+%DEVDESC_14%=DriverInstall,USB\VID_1235&PID_8201
+%DEVDESC_15%=DriverInstall,USB\VID_1235&PID_8206
+%DEVDESC_16%=DriverInstall,USB\VID_1235&PID_8207
+%DEVDESC_17%=DriverInstall,USB\VID_1235&PID_8208
+%DEVDESC_18%=DriverInstall,USB\VID_1235&PID_8210
+%DEVDESC_19%=DriverInstall,USB\VID_1235&PID_8211
+%DEVDESC_20%=DriverInstall,USB\VID_1235&PID_8212
+%DEVDESC_21%=DriverInstall,USB\VID_1235&PID_8213
+%DEVDESC_22%=DriverInstall,USB\VID_1235&PID_8214
+%DEVDESC_23%=DriverInstall,USB\VID_1235&PID_8215
+%DEVDESC_24%=DriverInstall,USB\VID_1235&PID_800e
+%DEVDESC_25%=DriverInstall,USB\VID_1235&PID_8008
+%DESCRIPTION_PRODUCT_LINE_ROOT%=SwRootInstall,ROOT\Focusriteusb
+
+[SourceDisksFiles]
+Focusriteusb.sys = 1
+FocusriteusbSwRoot.sys = 1
+WdfCoInstaller01011.dll=1
+
+[SourceDisksNames]
+1 = %DESCRIPTION_PRODUCT_LINE%
+
+[DestinationDirs]
+DefaultDestDir=12
+WdfCoInstall_CopyFiles = 11
+
+[ClassInstall32]
+Addreg=TBAudioClassReg
+
+[TBAudioClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GA;;;BA)(A;;GRGWGX;;;WD)"      ; Allow generic-all access to Built-in administrators and Local system, allow read write execute access to everyone
+
+;------------------------------------------------------------------------------
+;  Windows 7+ Sections: USB Devices
+;------------------------------------------------------------------------------
+[DriverInstall.NT]
+CopyFiles=DriverCopyFiles
+
+[DriverInstall.NT.Services]
+Addservice = Focusriteusb, 0x00000002, DriverInstall_AddService
+
+[DriverInstall_AddService]
+DisplayName    = %DESCRIPTION_PRODUCT_LINE%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\Focusriteusb.sys
+AddReg = DriverServiceParams_AddReg
+
+[DriverServiceParams_AddReg]
+HKR,Parameters,OutputSafetyOffset,0x00010001,16
+HKR,Parameters,InputSafetyOffset,0x00010001,0
+HKR,Parameters,RtlTablePath,0x00000000, "\DosDevices\c:\Program Files\Focusriteusb\RtlTable.bin"
+
+[DriverCopyFiles]
+Focusriteusb.sys
+FocusriteusbSwRoot.sys
+
+[DriverInstall.NT.hw]
+Include=machine.inf
+Needs=PciIoSpaceNotRequired
+
+[DriverInstall.NT.CoInstallers]
+AddReg=WdfCoInstall_AddReg
+CopyFiles=WdfCoInstall_CopyFiles
+
+[DriverInstall.NT.Wdf]
+KmdfService = Focusriteusb, WdfCoInstall_Ver
+
+
+;------------------------------------------------------------------------------
+;  Windows 7+ Sections: Sofwtare Root
+;------------------------------------------------------------------------------
+[SwRootInstall.NT]
+CopyFiles=SwRootCopyFiles
+
+[SwRootInstall.NT.HW]
+AddReg=SwRootInstall.AddReg
+
+[SwRootInstall.AddReg]
+HKR,,FriendlyName,,%DESCRIPTION_PRODUCT_LINE_ROOT%
+HKR,,DeviceCharacteristics,0x10001,0x0100         ; Use same security checks on relative opens
+HKR,,Security,,"D:P(A;;GA;;;SY)(A;;GA;;;BA)(A;;GRGWGX;;;WD)"      ; Allow generic-all access to Built-in administrators and Local system, allow read write execute access to everyone
+
+[SwRootCopyFiles]
+FocusriteusbSwRoot.sys
+
+[SwRootInstall.NT.Services]
+AddService = FocusriteusbSwRoot, 0x00000002, SwRootInstall_AddService
+
+[SwRootInstall_AddService]
+DisplayName    = %DESCRIPTION_PRODUCT_LINE_ROOT%
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  =  %12%\FocusriteusbSwRoot.sys
+LoadOrderGroup = Extended Base
+
+[SwRootInstall.NT.CoInstallers]
+AddReg=WdfCoInstall_AddReg
+CopyFiles=WdfCoInstall_CopyFiles
+
+[SwRootInstall.NT.Wdf]
+KmdfService = FocusriteusbSwRoot, WdfCoInstall_Ver
+
+
+;------------------------------------------------------------------------------
+;  Windows WDF CoInstaller Section
+;------------------------------------------------------------------------------
+
+[WdfCoInstall_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller01011.dll,WdfCoInstaller"
+
+[WdfCoInstall_CopyFiles]
+WdfCoInstaller01011.dll
+
+
+[WdfCoInstall_Ver]
+KmdfLibraryVersion = 1.11
+
+
+
+;------------------------------------------------------------------------------
+;  String Definitions
+;------------------------------------------------------------------------------
+[Strings]
+MFGNAME = "Focusrite Audio Engineering, Ltd."
+
+DEVDESC_0="Scarlett Solo 1st Gen"
+DEVDESC_1="Scarlett 2i2 1st Gen"
+DEVDESC_2="Scarlett 2i2 1st Gen"
+DEVDESC_3="Scarlett 2i4 1st Gen"
+DEVDESC_4="Scarlett 6i6 1st Gen"
+DEVDESC_5="Scarlett 8i6 1st Gen"
+DEVDESC_6="Scarlett 18i6 1st Gen"
+DEVDESC_7="Scarlett 18i8 1st Gen"
+DEVDESC_8="Scarlett 18i20 1st Gen"
+DEVDESC_9="Scarlett Solo 2nd Gen"
+DEVDESC_10="Scarlett 2i2 2nd Gen"
+DEVDESC_11="Scarlett 2i4 2nd Gen"
+DEVDESC_12="Scarlett 6i6 2nd Gen"
+DEVDESC_13="Scarlett 18i8 2nd Gen"
+DEVDESC_14="Scarlett 18i20 2nd Gen"
+DEVDESC_15="Clarett 2Pre USB"
+DEVDESC_16="Clarett 4Pre USB"
+DEVDESC_17="Clarett 8Pre USB"
+DEVDESC_18="Scarlett 2i2 3rd Gen"
+DEVDESC_19="Scarlett Solo 3rd Gen"
+DEVDESC_20="Scarlett 4i4 3rd Gen"
+DEVDESC_21="Scarlett 8i6 3rd Gen"
+DEVDESC_22="Scarlett 18i8 3rd Gen"
+DEVDESC_23="Scarlett 18i20 3rd Gen"
+DEVDESC_24="iTrack Solo"
+DEVDESC_25="Saffire 6 USB 2.0"
+
+DESCRIPTION_PRODUCT_LINE = "Focusrite Usb"
+DESCRIPTION_PRODUCT_LINE_ROOT = "Usb Software Root"
+ClassName = "Focusrite Audio"
